@@ -1,0 +1,74 @@
+const express = require('express')
+const router = express.Router()
+
+const ReservasController = require('../controllers/hotelController')
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Reserva:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: El identificador único de la reserva
+ *         hotelName:
+ *           type: string
+ *           description: El nombre del hotel reservado
+ *         date_start:
+ *           type: string
+ *           format: date
+ *           description: La fecha de inicio de la reserva
+ *         date_end:
+ *           type: string
+ *           format: date
+ *           description: La fecha de fin de la reserva
+ *         room_type:
+ *           type: string
+ *           description: El tipo de habitación reservada
+ *         status:
+ *           type: string
+ *           description: El estado de la reserva (por ejemplo, confirmada, pendiente, cancelada, etc.)
+ *         guest_count:
+ *           type: integer
+ *           description: El número de huéspedes que se alojarán en la habitación
+ *       required:
+ *         - id
+ *         - hotelName
+ *         - date_start
+ *         - date_end
+ *         - room_type
+ *         - status
+ *         - guest_count
+ *       example:
+ *         id: 1
+ *         hotelName: Hotel California
+ *         date_start: "2021-01-01"
+ *         date_end: "2021-01-03"
+ *         room_type: Suite
+ *         status: confirmed
+ *         guest_count: 2
+ */
+
+
+/**
+ * @swagger
+ * /api/reservas:
+ *   get:
+ *     summary: Obtener todas las reservas
+ *     tags: [Reservas]
+ *     responses:
+ *       200:
+ *         description: Regresa todas las reservas
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Reserva'
+ *
+ */
+router.get('/', ReservasController.GetAll)
+
+module.exports = router
